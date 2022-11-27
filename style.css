@@ -1,0 +1,16 @@
+:root {
+    --silver: #dadada;
+  }
+
+
+.video-container {
+    background-color: black;
+}
+
+svg {
+    width: 28px;
+    height: 28px;
+    fill: #fff;
+    stroke: #fff;
+    cursor: pointer;
+  }
