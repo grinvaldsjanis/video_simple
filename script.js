@@ -2,7 +2,9 @@
 //
 var video = document.createElement('video');
 var videoIsWorking = video.canPlayType('video/mp4');
-video.src = 'video.mp4';
+var playbackIcons = document.querySelectorAll('.playback-icons use');
+//
+video.src = 'src/video.mp4';
 video.width = 500;
 if (videoIsWorking) {
     video.controls = false; //hiding controls
@@ -16,13 +18,20 @@ playButton.type = 'button';
 // ---Init HTML formatting
 //
 var body = document.body;
-var box = document.createElement('div');
+var playerBox = document.createElement('div');
+playerBox.classList.add("player-box");
+var videoBox = document.createElement('div');
+videoBox.classList.add("video-box");
+var controlsBox = document.createElement('div');
+controlsBox.classList.add("controls-box");
 //
 // --- Append elements into HTML
 //
-body.append(box);
-box.appendChild(video);
-box.appendChild(playButton);
+body.append(playerBox);
+playerBox.append(videoBox);
+playerBox.append(controlsBox);
+videoBox.appendChild(video);
+controlsBox.appendChild(playButton);
 //
 // --Functions
 //
@@ -32,6 +41,16 @@ function togglePlay() {
     }
     else {
         video.pause();
+    }
+}
+// -- Update play button
+function updatePlayButton() {
+    playbackIcons.forEach(function (icon) { return icon.classList.toggle('hidden'); });
+    if (video.paused) {
+        playButton.setAttribute('data-title', 'Play (k)');
+    }
+    else {
+        playButton.setAttribute('data-title', 'Pause (k)');
     }
 }
 //
