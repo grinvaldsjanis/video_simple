@@ -1,31 +1,22 @@
-:root {
-  --silver: #dadada;
-}
-
-
-
-
-.video-container {
-  background-color: black;
-}
-
-.play-button {
-  background: url('src/play-icon.svg');
-}
-
-.pause-button {
-  background: url('src/pause-icon.svg');
-}
-
-svg {
-  width: 28px;
-  height: 28px;
-  fill: #fff;
-  stroke: #fff;
-  cursor: pointer;
-}
-
 button {
-  height: 40px;
-  width: 40px;
+  height: 60px;
+  width: 60px;
+  cursor: pointer;
+  border: none;
+}
+
+.play {
+  padding: 10px;
+  background: url("src/play-icon.svg") center center no-repeat;
+
+}
+
+.pause {
+  padding: 10px;
+  background: url("src/pause-icon.svg") center center no-repeat;
+
+}
+
+.hidden {
+  display: none;
 }

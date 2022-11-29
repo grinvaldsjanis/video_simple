@@ -1,8 +1,8 @@
 // --- init Video player
 //
-var video = document.createElement('video');
-var videoIsWorking = video.canPlayType('video/mp4');
-var playbackIcons = document.querySelectorAll('.playback-icons use');
+const video = document.createElement('video');
+const videoIsWorking = video.canPlayType('video/mp4');
+//const playbackIcons = document.querySelectorAll('.playback-icons use');
 //
 video.src = 'src/video.mp4';
 video.width = 500;
@@ -10,50 +10,49 @@ if (videoIsWorking) {
     video.controls = false; //hiding controls
 }
 //
-// --- Init custom play button
-//
-var playButton = document.createElement('button');
-playButton.type = 'button';
-//
 // ---Init HTML formatting
 //
-var body = document.body;
-var playerBox = document.createElement('div');
+const body = document.body;
+const playerBox = document.createElement('div');
 playerBox.classList.add("player-box");
-var videoBox = document.createElement('div');
+const videoBox = document.createElement('div');
 videoBox.classList.add("video-box");
-var controlsBox = document.createElement('div');
+const controlsBox = document.createElement('div');
 controlsBox.classList.add("controls-box");
+//
+// --- Init custom play button
+//
+const playButton = document.createElement('button');
+const pauseButton = document.createElement('button');
+playButton.type = 'button';
+pauseButton.type = 'button';
+playButton.className = 'play';
+pauseButton.className = 'pause hidden';
 //
 // --- Append elements into HTML
 //
-body.append(playerBox);
-playerBox.append(videoBox);
-playerBox.append(controlsBox);
-videoBox.appendChild(video);
+body.append(playerBox); // place whole player
+playerBox.append(videoBox); // place videoBox
+playerBox.append(controlsBox); //place control-box
+videoBox.appendChild(video); // place video
 controlsBox.appendChild(playButton);
+controlsBox.appendChild(pauseButton); // place button
 //
 // --Functions
 //
 function togglePlay() {
     if (video.paused || video.ended) {
         video.play();
+        pauseButton.className = 'pause';
+        playButton.className = 'play hidden';
     }
     else {
         video.pause();
-    }
-}
-// -- Update play button
-function updatePlayButton() {
-    playbackIcons.forEach(function (icon) { return icon.classList.toggle('hidden'); });
-    if (video.paused) {
-        playButton.setAttribute('data-title', 'Play (k)');
-    }
-    else {
-        playButton.setAttribute('data-title', 'Pause (k)');
+        pauseButton.className = 'pause hidden';
+        playButton.className = 'play';
     }
 }
 //
 // --- Listeners
 //
-playButton.addEventListener('click', togglePlay);
+controlsBox.addEventListener('click', togglePlay);
