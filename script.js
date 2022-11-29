@@ -30,7 +30,7 @@ playButton.className = 'play';
 //
 const fullscreenButton = document.createElement('button');
 fullscreenButton.type = 'button';
-fullscreenButton.className = 'normal';
+fullscreenButton.className = 'fullscreen';
 //
 // --- Append elements into HTML
 //
@@ -39,6 +39,7 @@ playerBox.append(videoBox); // place videoBox
 playerBox.append(controlsBox); //place control-box
 videoBox.appendChild(video); // place video
 controlsBox.appendChild(playButton);
+controlsBox.appendChild(fullscreenButton);
 // controlsBox.appendChild(pauseButton); // place button
 //
 // --Functions
@@ -60,10 +61,21 @@ function updatePlayButton() {
         playButton.className = 'pause';
     }
 }
+// --Fullscreen
+function toggleFullScreen() {
+    if (document.fullscreenElement) {
+        document.exitFullscreen();
+    }
+    else {
+        videoBox.requestFullscreen();
+    }
+}
 //
 // --- Listeners
 //
-controlsBox.addEventListener('click', togglePlay);
+playButton.addEventListener('click', togglePlay);
 video.addEventListener('play', updatePlayButton);
 video.addEventListener('pause', updatePlayButton);
+//
+fullscreenButton.onclick = toggleFullScreen;
 //# sourceMappingURL=script.js.map
