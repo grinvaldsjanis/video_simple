@@ -48,11 +48,17 @@ function togglePlay() {
     }
     else {
         video.pause();
-        pauseButton.className = 'pause hidden';
         playButton.className = 'play';
+        pauseButton.className = 'pause hidden';
     }
 }
+// -- Update play button
+// function updatePlayButton() {
+// }
 //
 // --- Listeners
 //
 controlsBox.addEventListener('click', togglePlay);
+//video.addEventListener('play', updatePlayButton);
+//video.addEventListener('pause', updatePlayButton);
+//# sourceMappingURL=script.js.map

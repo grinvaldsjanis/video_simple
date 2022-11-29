@@ -49,8 +49,8 @@ function togglePlay() {
         playButton.className = 'play hidden'
     } else {
         video.pause();
-        pauseButton.className = 'pause hidden'
         playButton.className = 'play'
+        pauseButton.className = 'pause hidden'
     }
 }
 // -- Update play button

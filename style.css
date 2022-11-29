@@ -1,6 +1,6 @@
 button {
-  height: 60px;
-  width: 60px;
+  height: 30px;
+  width: 30px;
   cursor: pointer;
   border: none;
 }
@@ -8,13 +8,11 @@ button {
 .play {
   padding: 10px;
   background: url("src/play-icon.svg") center center no-repeat;
-
 }
 
 .pause {
   padding: 10px;
   background: url("src/pause-icon.svg") center center no-repeat;
-
 }
 
 .hidden {
