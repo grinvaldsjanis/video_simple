@@ -5,33 +5,28 @@ button {
   border: none;
   border-radius: .25rem;
   margin: 0px;
+  background-color: rgb(212, 212, 212);
+  filter: invert(100%) brightness(200%) contrast(30%);
+  transition: all 0.2s ease-in-out;
+  background-position: center;
+  background-size: 50%;
+  background-repeat: no-repeat;
 }
 
 button:hover {
-  transform: scale(1.1,1.1)
+  transform: scale(1.1,1.1);
+  background-color: rgb(179, 179, 179);
+}
+
+button:active {
+  transform: scale(0.8,0.8);
+  background-color: rgb(179, 179, 179);
 }
 
 .play {
   background-image: url(src/play-icon.svg);
-  background-position: center;
-  background-size: 50%;
-  background-repeat: no-repeat;
-  background-color: rgb(212, 212, 212);
-  filter: invert(100%) brightness(200%) contrast(30%);
-  transition: all 0.3s ease-in-out;
 }
 
 .pause {
   background-image: url(src/pause-icon.svg);
-  background-position: center;
-  background-size: 50%;
-  background-repeat: no-repeat;
-  background-color: rgb(212, 212, 212);
-  filter: invert(100%) brightness(200%) contrast(30%);
-  transition: all 0.3s ease-in-out;
 }
-
-/* 
-.hidden {
-  display: none;
-} */
