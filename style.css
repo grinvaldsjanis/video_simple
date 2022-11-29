@@ -7,12 +7,22 @@ button {
 
 .play {
   padding: 10px;
-  background: url("src/play-icon.svg") center center no-repeat;
+  -webkit-mask: url(src/play-icon.svg) no-repeat 100% 100%;
+  mask: url(src/play-icon.svg) no-repeat 100% 100%;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  background-color: rgb(131, 131, 131);
+  transition: background-image 0.2s ease-in-out;
 }
 
 .pause {
   padding: 10px;
-  background: url("src/pause-icon.svg") center center no-repeat;
+  -webkit-mask: url("src/pause-icon.svg") no-repeat 100% 100%;
+  mask: url("src/pause-icon.svg") no-repeat 100% 100%;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  background-color: rgb(131, 131, 131);
+  transition: all 0.2s ease-in-out;
 }
 
 .hidden {

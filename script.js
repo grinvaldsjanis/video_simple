@@ -36,20 +36,18 @@ playerBox.append(videoBox); // place videoBox
 playerBox.append(controlsBox); //place control-box
 videoBox.appendChild(video); // place video
 controlsBox.appendChild(playButton);
-controlsBox.appendChild(pauseButton); // place button
+// controlsBox.appendChild(pauseButton); // place button
 //
 // --Functions
 //
 function togglePlay() {
     if (video.paused || video.ended) {
         video.play();
-        pauseButton.className = 'pause';
-        playButton.className = 'play hidden';
+        playButton.className = 'pause';
     }
     else {
         video.pause();
         playButton.className = 'play';
-        pauseButton.className = 'pause hidden';
     }
 }
 // -- Update play button
