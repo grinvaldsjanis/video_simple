@@ -24,11 +24,14 @@ controlsBox.classList.add("controls-box");
 // --- Init custom play button
 //
 const playButton = document.createElement('button');
-const pauseButton = document.createElement('button');
 playButton.type = 'button';
-pauseButton.type = 'button';
 playButton.className = 'play';
-pauseButton.className = 'pause hidden';
+//
+// --- Init custom fullscreen button
+//
+const fullscreenButton = document.createElement('button');
+fullscreenButton.type = 'button';
+fullscreenButton.className = 'normal';
 //
 // --- Append elements into HTML
 //
@@ -45,19 +48,21 @@ controlsBox.appendChild(playButton);
 function togglePlay() {
     if (video.paused || video.ended) {
         video.play();
-        playButton.className = 'pause'
     } else {
         video.pause();
-        playButton.className = 'play'
     }
 }
 // -- Update play button
-// function updatePlayButton() {
-
-// }
+function updatePlayButton() {
+    if (video.paused) {
+        playButton.className = 'play'
+    } else {
+        playButton.className = 'pause'
+    }
+}
 //
 // --- Listeners
 //
 controlsBox.addEventListener('click', togglePlay);
-//video.addEventListener('play', updatePlayButton);
-//video.addEventListener('pause', updatePlayButton);
+video.addEventListener('play', updatePlayButton);
+video.addEventListener('pause', updatePlayButton);

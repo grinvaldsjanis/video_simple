@@ -3,28 +3,35 @@ button {
   width: 30px;
   cursor: pointer;
   border: none;
+  border-radius: .25rem;
+  margin: 0px;
+}
+
+button:hover {
+  transform: scale(1.1,1.1)
 }
 
 .play {
-  padding: 10px;
-  -webkit-mask: url(src/play-icon.svg) no-repeat 100% 100%;
-  mask: url(src/play-icon.svg) no-repeat 100% 100%;
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  background-color: rgb(131, 131, 131);
-  transition: background-image 0.2s ease-in-out;
+  background-image: url(src/play-icon.svg);
+  background-position: center;
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-color: rgb(212, 212, 212);
+  filter: invert(100%) brightness(200%) contrast(30%);
+  transition: all 0.3s ease-in-out;
 }
 
 .pause {
-  padding: 10px;
-  -webkit-mask: url("src/pause-icon.svg") no-repeat 100% 100%;
-  mask: url("src/pause-icon.svg") no-repeat 100% 100%;
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  background-color: rgb(131, 131, 131);
-  transition: all 0.2s ease-in-out;
+  background-image: url(src/pause-icon.svg);
+  background-position: center;
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-color: rgb(212, 212, 212);
+  filter: invert(100%) brightness(200%) contrast(30%);
+  transition: all 0.3s ease-in-out;
 }
 
+/* 
 .hidden {
   display: none;
-}
+} */
