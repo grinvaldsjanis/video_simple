@@ -7,7 +7,6 @@ audioClick.volume = 0.1;
 //const playbackIcons = document.querySelectorAll('.playback-icons use');
 //
 video.src = 'src/video.mp4';
-video.width = 500;
 video.preload = "metadata"
 video.poster = "src/poster.jpg"
 
@@ -51,8 +50,8 @@ timeLine.className = 'timeline';
 //
 body.append(playerBox); // place whole player
 playerBox.append(videoBox) // place videoBox
-playerBox.append(controlsBox); //place control-box
 videoBox.appendChild(video); // place video
+videoBox.append(controlsBox); //place control-box
 controlsBox.appendChild(timelineBox);
 timelineBox.appendChild(timeLine);
 controlsBox.appendChild(bottomControls);
@@ -110,7 +109,7 @@ function updateProgress() {
 }
 // -- Update timeline
 function changeTime() {
-    video.currentTime = +timeLine.value
+    video.currentTime = Math.floor(+timeLine.value)
 }
 //
 // --- Listeners
