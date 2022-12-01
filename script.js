@@ -82,12 +82,14 @@ function toggleFullScreen() {
     audioClick.play();
     if (document.fullscreenElement) {
         document.exitFullscreen();
+        fullscreenButton.className = "fullscreen";
     }
     else {
         videoBox.requestFullscreen();
+        fullscreenButton.className = "exit-fullscreen";
     }
 }
-//
+// --Formatting time for showing
 function formatTime(timeInSeconds) {
     const result = new Date(timeInSeconds * 1000).toISOString().substr(11, 8);
     return {
@@ -100,7 +102,7 @@ function formatTime(timeInSeconds) {
 function updateTimeElapsed() {
     const time = formatTime(Math.round(video.currentTime));
 }
-//
+// -- initial values for video
 function initializeVideo() {
     const videoDuration = Math.round(video.duration);
     timeLine.setAttribute('max', videoDuration.toString());
