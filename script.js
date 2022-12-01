@@ -26,6 +26,10 @@ const timelineBox = document.createElement('div');
 timelineBox.className = "timeline-controls";
 const bottomControls = document.createElement('div');
 bottomControls.className = "bottom-controls";
+const leftControls = document.createElement('div');
+const rightControls = document.createElement('div');
+leftControls.className = "left-controls";
+rightControls.className = "right-controls";
 //
 // --- Init custom play button
 //
@@ -45,6 +49,16 @@ const timeLine = document.createElement('input');
 timeLine.type = 'range';
 timeLine.className = 'timeline';
 //
+const volumeBox = document.createElement('div');
+timelineBox.className = "volume-controls";
+const volSlider = document.createElement('input');
+volSlider.type = 'range';
+volSlider.className = 'volume';
+volSlider.value = "1";
+volSlider.max = "1";
+volSlider.min = "0";
+volSlider.step = "0.01";
+//
 // --- Append elements into HTML
 //
 body.append(playerBox); // place whole player
@@ -54,8 +68,11 @@ videoBox.append(controlsBox); //place control-box
 controlsBox.appendChild(timelineBox);
 timelineBox.appendChild(timeLine);
 controlsBox.appendChild(bottomControls);
-bottomControls.appendChild(playButton);
-bottomControls.appendChild(fullscreenButton);
+bottomControls.appendChild(leftControls);
+bottomControls.appendChild(rightControls);
+leftControls.appendChild(playButton);
+leftControls.appendChild(volSlider);
+rightControls.appendChild(fullscreenButton);
 //
 // --Functions
 //
@@ -114,6 +131,13 @@ function updateProgress() {
 function changeTime() {
     video.currentTime = Math.floor(+timeLine.value);
 }
+// -- Volume
+function updateVolume() {
+    // if (video.muted) {
+    //   video.muted = false;
+    // }
+    video.volume = +volSlider.value;
+}
 //
 // --- Listeners
 //
@@ -126,7 +150,10 @@ video.addEventListener('timeupdate', updateTimeElapsed);
 video.addEventListener('timeupdate', updateProgress);
 //
 timeLine.addEventListener('change', changeTime);
-//timeLine.addEventListener('input', skipAhead);
+timeLine.addEventListener('input', changeTime);
+//
+volSlider.addEventListener('change', updateVolume);
+volSlider.addEventListener('input', updateVolume);
 //
 fullscreenButton.onclick = toggleFullScreen;
 //# sourceMappingURL=script.js.map

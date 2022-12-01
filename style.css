@@ -47,10 +47,21 @@ video {
   background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.5));
 }
 
-.controls-box.hide {
+.bottom-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left-controls {
+  display: flex;
+  align-items: center;
+}
+
+/* .controls-box.hide {
   opacity: 0;
   pointer-events: none;
-}
+} */
 
 .timeline {
   position: relative;
@@ -65,13 +76,19 @@ video {
   display: block;
 }
 
+button * {
+  pointer-events: none;
+}
+
 button {
   height: 30px;
   width: 30px;
+  padding: 3px;
   cursor: pointer;
   border: none;
+  outline: none;
   border-radius: .25rem;
-  margin: 2px;
+  margin-right: 7px;
   background-color: var(--theme-color);
   filter: hue-rotate(180deg) invert(100%) brightness(150%);
   transition: all 0.2s ease-in-out;
