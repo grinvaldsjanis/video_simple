@@ -3,10 +3,16 @@
   --theme-bgcolor: #dadada;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: inherit;
   margin: 0;
   padding: 0;
+}
+
+.hidden {
+  display: none;
 }
 
 body {
@@ -45,6 +51,12 @@ video {
   bottom: 0;
   transition: all 0.2s ease;
   background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.5));
+}
+
+.controls-box.hide {
+  opacity: 0;
+  pointer-events: none;
+  transition-delay: 1s;
 }
 
 .bottom-controls {
@@ -129,9 +141,11 @@ input[type=range] {
   width: 100%;
   background: none;
 }
+
 input[type=range]:focus {
   outline: none;
 }
+
 input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
   height: 5px;
@@ -142,6 +156,7 @@ input[type=range]::-webkit-slider-runnable-track {
   border-radius: 1px;
   border: 0px solid #000000;
 }
+
 input[type=range]::-webkit-slider-thumb {
   box-shadow: 0px 0px 0px #000000;
   border: 1px solid var(--theme-color);
@@ -154,9 +169,11 @@ input[type=range]::-webkit-slider-thumb {
   margin-top: -7px;
   transition: 0.4s all ease-out;
 }
+
 input[type=range]:focus::-webkit-slider-runnable-track {
   background: var(--theme-color);
 }
+
 input[type=range]::-moz-range-track {
   width: 100%;
   height: 5px;
@@ -167,6 +184,7 @@ input[type=range]::-moz-range-track {
   border-radius: 1px;
   border: 0px solid #000000;
 }
+
 input[type=range]::-moz-range-thumb {
   box-shadow: 0px 0px 0px #000000;
   border: 1px solid var(--theme-color);
@@ -177,6 +195,7 @@ input[type=range]::-moz-range-thumb {
   cursor: pointer;
   transition: 0.4s all ease-out;
 }
+
 input[type=range]::-ms-track {
   width: 100%;
   height: 5px;
@@ -186,18 +205,21 @@ input[type=range]::-ms-track {
   border-color: transparent;
   color: transparent;
 }
+
 input[type=range]::-ms-fill-lower {
   background: var(--theme-color);
   border: 0px solid #000000;
   border-radius: 2px;
   box-shadow: 0px 0px 0px #000000;
 }
+
 input[type=range]::-ms-fill-upper {
   background: var(--theme-color);
   border: 0px solid #000000;
   border-radius: 2px;
   box-shadow: 0px 0px 0px #000000;
 }
+
 input[type=range]::-ms-thumb {
   margin-top: 1px;
   box-shadow: 0px 0px 0px #000000;
@@ -209,9 +231,11 @@ input[type=range]::-ms-thumb {
   cursor: pointer;
   transition: 0.4s all ease-out;
 }
+
 input[type=range]:focus::-ms-fill-lower {
   background: #2497E3;
 }
+
 input[type=range]:focus::-ms-fill-upper {
   background: #2497E3;
 }

@@ -55,10 +55,10 @@ timelineBox.className = "volume-controls";
 const volSlider = document.createElement('input');
 volSlider.type = 'range';
 volSlider.className = 'volume';
-volSlider.value="1";
-volSlider.max="1";
-volSlider.min="0";
-volSlider.step="0.01";
+volSlider.value = "1";
+volSlider.max = "1";
+volSlider.min = "0";
+volSlider.step = "0.01";
 //
 // --- Append elements into HTML
 //
@@ -79,6 +79,7 @@ rightControls.appendChild(fullscreenButton);
 // --Functions
 //
 function togglePlay() {
+    audioClick.volume = 0.1 * video.volume;
     audioClick.play()
     if (video.paused || video.ended) {
         video.play();
@@ -113,7 +114,7 @@ function formatTime(timeInSeconds) {
         minutes: result.substr(3, 2),
         seconds: result.substr(6, 2),
     };
-};
+}
 //
 function updateTimeElapsed() {
     const time = formatTime(Math.round(video.currentTime));
@@ -135,8 +136,21 @@ function updateVolume() {
     // if (video.muted) {
     //   video.muted = false;
     // }
-  
+
     video.volume = +volSlider.value;
+}
+// - Hiding showing controls
+// hideControls hides the video controls when not in use
+// if the video is paused, the controls must remain visible
+function hideControls() {
+    if (video.paused) {
+        return;
+    }
+    controlsBox.classList.add('hide');
+}
+
+function showControls() {
+    controlsBox.classList.remove('hide');
 }
 //
 // --- Listeners
@@ -156,3 +170,6 @@ volSlider.addEventListener('change', updateVolume);
 volSlider.addEventListener('input', updateVolume);
 //
 fullscreenButton.onclick = toggleFullScreen;
+//
+playerBox.addEventListener('mouseenter', showControls);
+playerBox.addEventListener('mouseleave', hideControls);

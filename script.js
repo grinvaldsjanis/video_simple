@@ -77,6 +77,7 @@ rightControls.appendChild(fullscreenButton);
 // --Functions
 //
 function togglePlay() {
+    audioClick.volume = 0.1 * video.volume;
     audioClick.play();
     if (video.paused || video.ended) {
         video.play();
@@ -114,7 +115,6 @@ function formatTime(timeInSeconds) {
         seconds: result.substr(6, 2),
     };
 }
-;
 //
 function updateTimeElapsed() {
     const time = formatTime(Math.round(video.currentTime));
@@ -138,6 +138,18 @@ function updateVolume() {
     // }
     video.volume = +volSlider.value;
 }
+// - Hiding showing controls
+// hideControls hides the video controls when not in use
+// if the video is paused, the controls must remain visible
+function hideControls() {
+    if (video.paused) {
+        return;
+    }
+    controlsBox.classList.add('hide');
+}
+function showControls() {
+    controlsBox.classList.remove('hide');
+}
 //
 // --- Listeners
 //
@@ -156,4 +168,7 @@ volSlider.addEventListener('change', updateVolume);
 volSlider.addEventListener('input', updateVolume);
 //
 fullscreenButton.onclick = toggleFullScreen;
+//
+playerBox.addEventListener('mouseenter', showControls);
+playerBox.addEventListener('mouseleave', hideControls);
 //# sourceMappingURL=script.js.map
