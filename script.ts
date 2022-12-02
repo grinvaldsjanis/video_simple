@@ -4,6 +4,7 @@ const video: HTMLVideoElement = document.createElement('video');
 const videoIsWorking: string = video.canPlayType('video/mp4');
 const audioClick = new Audio('https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/click.mp3');
 audioClick.volume = 0.1;
+const jumpStep = 5;
 //const playbackIcons = document.querySelectorAll('.playback-icons use');
 //
 video.src = 'src/video.mp4';
@@ -38,6 +39,18 @@ const playButton = document.createElement('button');
 playButton.type = 'button';
 playButton.className = 'play';
 //
+const skipForwardButton = document.createElement('button');
+skipForwardButton.type = 'button';
+skipForwardButton.className = 'forward';
+//
+const skipBackwardButton = document.createElement('button');
+skipBackwardButton.type = 'button';
+skipBackwardButton.className = 'backward';
+//
+const muteButton = document.createElement('button');
+muteButton.type = 'button';
+muteButton.className = 'mute-button';
+//
 // --- Init custom fullscreen button
 //
 const fullscreenButton = document.createElement('button');
@@ -60,6 +73,14 @@ volSlider.max = "1";
 volSlider.min = "0";
 volSlider.step = "0.01";
 //
+const time = document.createElement('div');
+time.className = "time";
+const timeElapsed = document.createElement('time');
+timeElapsed.className = "time-elapsed";
+timeElapsed.innerText = '00:00 / ';
+const timeDuration = document.createElement('time');
+timeDuration.className = "time-duration";
+//
 // --- Append elements into HTML
 //
 body.append(playerBox); // place whole player
@@ -72,7 +93,13 @@ controlsBox.appendChild(bottomControls);
 bottomControls.appendChild(leftControls);
 bottomControls.appendChild(rightControls);
 leftControls.appendChild(playButton);
+leftControls.appendChild(skipBackwardButton);
+leftControls.appendChild(skipForwardButton);
+leftControls.appendChild(muteButton);
 leftControls.appendChild(volSlider);
+rightControls.appendChild(time);
+time.appendChild(timeElapsed);
+time.appendChild(timeDuration);
 rightControls.appendChild(fullscreenButton);
 
 //
@@ -115,14 +142,19 @@ function formatTime(timeInSeconds) {
         seconds: result.substr(6, 2),
     };
 }
-//
-function updateTimeElapsed() {
-    const time = formatTime(Math.round(video.currentTime));
-}
 // -- initial values for video
 function initializeVideo() {
     const videoDuration = Math.round(video.duration);
     timeLine.setAttribute('max', videoDuration.toString());
+    const time = formatTime(videoDuration);
+    timeDuration.innerText = `${time.minutes}:${time.seconds}`;
+    //timeDuration.setAttribute('datetime', `${time.minutes}m ${time.seconds}s`);
+}
+
+function updateTimeElapsed() {
+    const time = formatTime(Math.round(video.currentTime));
+    timeElapsed.innerText = `${time.minutes}:${time.seconds} / `;
+    //timeElapsed.setAttribute('datetime', `${time.minutes}m ${time.seconds}s`);
 }
 function updateProgress() {
     timeLine.value = Math.floor(video.currentTime).toString(); //gives seconds
@@ -131,21 +163,44 @@ function updateProgress() {
 function changeTime() {
     video.currentTime = Math.floor(+timeLine.value)
 }
+function jumpForward() {
+    if (video.currentTime + jumpStep < video.duration) {
+        video.currentTime += jumpStep;
+    } else {
+        video.currentTime = video.duration;
+    }
+}
+function jumpBack() {
+    if (video.currentTime - jumpStep > 0) {
+        video.currentTime -= jumpStep;
+    } else {
+        video.currentTime = 0
+    }
+}
 // -- Volume
 function updateVolume() {
-    // if (video.muted) {
-    //   video.muted = false;
-    // }
-
+    if (video.muted) {
+        video.muted = false;
+    }
     video.volume = +volSlider.value;
 }
-// - Hiding showing controls
-// hideControls hides the video controls when not in use
-// if the video is paused, the controls must remain visible
+function toggleMute() {
+    video.muted = !video.muted;
+
+    if (video.muted) {
+        muteButton.classList.add('mute');
+        //   volume.setAttribute('data-volume', volume.value);
+        //   volume.value = 0;
+    } else {
+        muteButton.classList.remove('mute');
+        //   volume.value = volume.dataset.volume;
+    }
+}
 function hideControls() {
     if (video.paused) {
         return;
     }
+    console.log("Trigger")
     controlsBox.classList.add('hide');
 }
 
@@ -155,11 +210,19 @@ function showControls() {
 //
 // --- Listeners
 //
-playButton.addEventListener('click', togglePlay);
+video.addEventListener('loadedmetadata', initializeVideo);
+
+playButton.onclick = togglePlay;
+video.onclick = togglePlay;
 video.addEventListener('play', updatePlayButton);
 video.addEventListener('pause', updatePlayButton);
+muteButton.onclick = toggleMute;
+// skipBackwardButton.onclick = jumpTime(-5);
+skipBackwardButton.addEventListener('click', jumpBack);
+skipForwardButton.addEventListener('click', jumpForward);
+// skipForwardButton.onclick = jumpTime(5);
 //
-video.addEventListener('loadedmetadata', initializeVideo);
+
 video.addEventListener('timeupdate', updateTimeElapsed);
 video.addEventListener('timeupdate', updateProgress);
 //

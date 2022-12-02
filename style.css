@@ -3,6 +3,13 @@
   --theme-bgcolor: #dadada;
 }
 
+html {
+  box-sizing: border-box;
+  font-family: "YouTube Noto",Roboto,Arial,Helvetica,sans-serif;
+  font-weight: 700;
+  height: 100%;
+}
+
 *,
 *::before,
 *::after {
@@ -20,8 +27,8 @@ body {
 }
 
 .player-box {
-  width: 100%;
-  height: 100%;
+  /* width: 100%;
+  height: 100%; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,13 +57,13 @@ video {
   position: absolute;
   bottom: 0;
   transition: all 0.2s ease;
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.5));
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.8));
 }
 
 .controls-box.hide {
   opacity: 0;
   pointer-events: none;
-  transition-delay: 1s;
+  transition-delay: 0.3s;
 }
 
 .bottom-controls {
@@ -70,15 +77,29 @@ video {
   align-items: center;
 }
 
-/* .controls-box.hide {
-  opacity: 0;
-  pointer-events: none;
-} */
+.right-controls {
+  display: flex;
+  align-items: center;
+  color: var(--theme-color);
+}
+
+.time {
+  margin-right: 7px;
+}
 
 .timeline {
   position: relative;
   top: 0;
   width: 100%;
+  cursor: pointer;
+  height: 8.4px;
+  margin-bottom: 10px;
+}
+
+.volume {
+  position: relative;
+  top: 0;
+  width: 100px;
   cursor: pointer;
   height: 8.4px;
   margin-bottom: 10px;
@@ -93,8 +114,8 @@ button * {
 }
 
 button {
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
   padding: 3px;
   cursor: pointer;
   border: none;
@@ -134,11 +155,27 @@ button:active {
   background-image: url(src/compress.svg);
 }
 
+.mute-button {
+  background-image: url(src/mute.svg);
+}
+
+.mute-button.mute {
+  background-image: url(src/volume-high.svg);
+}
+
+.forward {
+  background-image: url(src/forward.svg);
+}
+
+.backward {
+  background-image: url(src/backward.svg);
+}
+
 input[type=range] {
   height: 22px;
   -webkit-appearance: none;
   margin: 5px 0;
-  width: 100%;
+  /* width: 100%; */
   background: none;
 }
 
@@ -147,7 +184,7 @@ input[type=range]:focus {
 }
 
 input[type=range]::-webkit-slider-runnable-track {
-  width: 100%;
+  /* width: 100%; */
   height: 5px;
   cursor: pointer;
   animate: 0.2s;
