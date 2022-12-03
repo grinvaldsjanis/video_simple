@@ -1,15 +1,15 @@
 // --- init Video player
 //
 const video = document.createElement('video');
-const videoIsWorking = video.canPlayType('video/mp4');
+const videoIsWorking = video.canPlayType('media/video/video.mp4');
 const audioClick = new Audio('https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/click.mp3');
 audioClick.volume = 0.1;
 const jumpStep = 5;
 //const playbackIcons = document.querySelectorAll('.playback-icons use');
 //
-video.src = 'src/video.mp4';
+video.src = 'media/video/video.mp4';
 video.preload = "metadata";
-video.poster = "src/poster.jpg";
+video.poster = "media/img/poster.jpg";
 if (videoIsWorking) {
     video.controls = false; //hiding controls
 }
@@ -216,11 +216,10 @@ video.onclick = togglePlay;
 video.addEventListener('play', updatePlayButton);
 video.addEventListener('pause', updatePlayButton);
 muteButton.onclick = toggleMute;
-// skipBackwardButton.onclick = jumpTime(-5);
+// 
 skipBackwardButton.addEventListener('click', jumpBack);
 skipForwardButton.addEventListener('click', jumpForward);
-// skipForwardButton.onclick = jumpTime(5);
-//
+// 
 video.addEventListener('timeupdate', updateTimeElapsed);
 video.addEventListener('timeupdate', updateProgress);
 //

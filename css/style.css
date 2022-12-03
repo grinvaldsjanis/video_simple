@@ -5,7 +5,7 @@
 
 html {
   box-sizing: border-box;
-  font-family: "YouTube Noto",Roboto,Arial,Helvetica,sans-serif;
+  font-family: "YouTube Noto", Roboto, Arial, Helvetica, sans-serif;
   font-weight: 700;
   height: 100%;
 }
@@ -124,7 +124,7 @@ button {
   margin-right: 7px;
   background-color: var(--theme-color);
   filter: hue-rotate(180deg) invert(100%) brightness(150%);
-  transition: all 0.2s ease-in-out;
+  transition: all 0.1s ease-in-out;
   background-position: center;
   background-size: 50%;
   background-repeat: no-repeat;
@@ -140,35 +140,35 @@ button:active {
 }
 
 .play {
-  background-image: url(src/play-icon.svg);
+  background-image: url(../svg/play-icon.svg);
 }
 
 .pause {
-  background-image: url(src/pause-icon.svg);
+  background-image: url(../svg/pause-icon.svg);
 }
 
 .fullscreen {
-  background-image: url(src/fullscreen-icon.svg);
+  background-image: url(../svg/fullscreen-icon.svg);
 }
 
 .exit-fullscreen {
-  background-image: url(src/compress.svg);
+  background-image: url(../svg/compress.svg);
 }
 
 .mute-button {
-  background-image: url(src/mute.svg);
+  background-image: url(../svg/mute.svg);
 }
 
 .mute-button.mute {
-  background-image: url(src/volume-high.svg);
+  background-image: url(../svg/volume-high.svg);
 }
 
 .forward {
-  background-image: url(src/forward.svg);
+  background-image: url(../svg/forward.svg);
 }
 
 .backward {
-  background-image: url(src/backward.svg);
+  background-image: url(../svg/backward.svg);
 }
 
 input[type=range] {
