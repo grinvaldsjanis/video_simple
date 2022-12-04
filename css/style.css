@@ -1,6 +1,8 @@
 :root {
   --theme-color: #3ac1ff;
   --theme-bgcolor: #dadada;
+  --arrow-size: 10px;
+  --tooltip-color: #1e5f7e;
 }
 
 html {
@@ -26,13 +28,6 @@ html {
 
 body {
   height: 100%;
-}
-
-.tooltip .tooltiptext {
-  width: 120px;
-  bottom: 100%;
-  left: 50%;
-  margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
 }
 
 .player-box {
@@ -134,11 +129,11 @@ button {
   border-radius: .25rem;
   margin-right: 7px;
   background-color: var(--theme-color);
-  filter: hue-rotate(180deg) invert(100%) brightness(150%);
   transition: 0.1s transform ease-in-out;
   background-position: center;
   background-size: 50%;
   background-repeat: no-repeat;
+  filter: invert(100%) hue-rotate(180deg) brightness(1.7);
 }
 
 button:hover {
@@ -147,27 +142,40 @@ button:hover {
 
 button::before, button::after {
   --scale: 0;
+
   position: absolute;
   top: -.25rem;
   left: 50%;
-  transform: translateX(-50%) translateY(-100%) scale(var(--scale));
-  transition: transform;
-  transition-delay: 1s;
-  transition-duration: .3s;
+  transform: translateX(-50%) translateY(var(--translate-y, 0)) scale(var(--scale));
+  transition: 150ms, transform;
+  transform-origin: bottom center;
+  filter: brightness(1.2);
 }
 
 button::before {
+  --translate-y: calc(-100% - var(--arrow-size));
+
+  color: black;
   content: attr(data-tooltip);
   padding: .2rem;
   border-radius: 3px;
   text-align: center;
   width: max-content;
   background: var(--theme-color);
-  color: black;
+
 }
 
-button:hover::before {
+button:hover::before,
+button:hover::after {
   --scale: 1;
+}
+
+button::after {
+  --translate-y: calc(-1.1 * var(--arrow-size));
+
+  content: '';
+  border: var(--arrow-size) solid transparent;
+  border-top-color: var(--theme-color);
 }
 
 button:active {
@@ -195,7 +203,7 @@ button:active {
 }
 
 .volume-button.mute {
-  background-image: url(../svg/mute.svg);
+  content: url(../svg/mute.svg);
 }
 
 .volume-button {
