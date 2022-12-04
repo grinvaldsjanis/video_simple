@@ -203,7 +203,7 @@ button:active {
 }
 
 .volume-button.mute {
-  content: url(../svg/mute.svg);
+  background-image: url(../svg/mute.svg);
 }
 
 .volume-button {
