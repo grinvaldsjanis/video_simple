@@ -38,24 +38,29 @@ rightControls.className = "right-controls";
 const playButton = document.createElement('button');
 playButton.type = 'button';
 playButton.className = 'play';
+playButton.setAttribute('data-tooltip', 'Play/Pause');
 //
 const skipForwardButton = document.createElement('button');
 skipForwardButton.type = 'button';
 skipForwardButton.className = 'forward';
+skipForwardButton.setAttribute('data-tooltip', 'Skip 5 seconds forward');
 //
 const skipBackwardButton = document.createElement('button');
 skipBackwardButton.type = 'button';
 skipBackwardButton.className = 'backward';
+skipBackwardButton.setAttribute('data-tooltip', 'Skip 5 seconds back');
 //
-const muteButton = document.createElement('button');
-muteButton.type = 'button';
-muteButton.className = 'mute-button';
+const volButton = document.createElement('button');
+volButton.type = 'button';
+volButton.className = 'volume-button';
+volButton.setAttribute('data-tooltip', 'Change volume');
 //
 // --- Init custom fullscreen button
 //
 const fullscreenButton = document.createElement('button');
 fullscreenButton.type = 'button';
 fullscreenButton.className = 'fullscreen';
+fullscreenButton.setAttribute('data-tooltip', 'Toggle fullscreen');
 //
 // --- Init timeline input range component
 //
@@ -67,7 +72,7 @@ const volumeBox = document.createElement('div');
 timelineBox.className = "volume-controls";
 const volSlider = document.createElement('input');
 volSlider.type = 'range';
-volSlider.className = 'volume';
+volSlider.className = 'volume hidden';
 volSlider.value = "1";
 volSlider.max = "1";
 volSlider.min = "0";
@@ -95,7 +100,7 @@ bottomControls.appendChild(rightControls);
 leftControls.appendChild(playButton);
 leftControls.appendChild(skipBackwardButton);
 leftControls.appendChild(skipForwardButton);
-leftControls.appendChild(muteButton);
+leftControls.appendChild(volButton);
 leftControls.appendChild(volSlider);
 rightControls.appendChild(time);
 time.appendChild(timeElapsed);
@@ -188,14 +193,15 @@ function toggleMute() {
     video.muted = !video.muted;
 
     if (video.muted) {
-        muteButton.classList.add('mute');
+        volButton.classList.add('mute');
         //   volume.setAttribute('data-volume', volume.value);
         //   volume.value = 0;
     } else {
-        muteButton.classList.remove('mute');
+        volButton.classList.remove('mute');
         //   volume.value = volume.dataset.volume;
     }
 }
+
 function hideControls() {
     if (video.paused) {
         return;
@@ -206,6 +212,12 @@ function hideControls() {
 
 function showControls() {
     controlsBox.classList.remove('hide');
+}
+function toggleVolSliderOn() {
+    volSlider.classList.remove('hidden');
+}
+function toggleVolSliderOff() {
+    volSlider.classList.add('hidden');
 }
 
 
@@ -218,7 +230,9 @@ playButton.onclick = togglePlay;
 video.onclick = togglePlay;
 video.addEventListener('play', updatePlayButton);
 video.addEventListener('pause', updatePlayButton);
-muteButton.onclick = toggleMute;
+volButton.onclick = toggleMute;
+volButton.onmouseover = toggleVolSliderOn;
+leftControls.onmouseleave = toggleVolSliderOff;
 // 
 skipBackwardButton.addEventListener('click', jumpBack);
 skipForwardButton.addEventListener('click', jumpForward);
