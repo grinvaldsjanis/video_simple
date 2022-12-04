@@ -140,14 +140,16 @@ button:hover {
   transform: scale(1.1, 1.1);
 }
 
-button::before, button::after {
+button::before,
+button::after {
   --scale: 0;
 
   position: absolute;
   top: -.25rem;
   left: 50%;
   transform: translateX(-50%) translateY(var(--translate-y, 0)) scale(var(--scale));
-  transition: 150ms, transform;
+  transition: 150ms transform;
+  transition-delay: .1s;
   transform-origin: bottom center;
   filter: brightness(1.2);
 }
@@ -168,6 +170,7 @@ button::before {
 button:hover::before,
 button:hover::after {
   --scale: 1;
+  transition-delay: 1s;
 }
 
 button::after {
