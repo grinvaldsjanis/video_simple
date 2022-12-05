@@ -37,7 +37,7 @@ rightControls.className = "right-controls";
 const playButton = document.createElement('button');
 playButton.type = 'button';
 playButton.className = 'play';
-playButton.setAttribute('data-tooltip', 'Play/Pause');
+playButton.setAttribute('data-tooltip', 'Play');
 //
 const skipForwardButton = document.createElement('button');
 skipForwardButton.type = 'button';
@@ -52,14 +52,14 @@ skipBackwardButton.setAttribute('data-tooltip', 'Skip 5 seconds back');
 const volButton = document.createElement('button');
 volButton.type = 'button';
 volButton.className = 'volume-button';
-volButton.setAttribute('data-tooltip', 'Change volume');
+volButton.setAttribute('data-tooltip', 'Mute');
 //
 // --- Init custom fullscreen button
 //
 const fullscreenButton = document.createElement('button');
 fullscreenButton.type = 'button';
 fullscreenButton.className = 'fullscreen';
-fullscreenButton.setAttribute('data-tooltip', 'Toggle fullscreen');
+fullscreenButton.setAttribute('data-tooltip', 'Open fullscreen');
 //
 // --- Init timeline input range component
 //
@@ -122,9 +122,11 @@ function togglePlay() {
 function updatePlayButton() {
     if (video.paused) {
         playButton.className = 'play';
+        playButton.setAttribute('data-tooltip', 'Play');
     }
     else {
         playButton.className = 'pause';
+        playButton.setAttribute('data-tooltip', 'Pause');
     }
 }
 // --Fullscreen
@@ -133,10 +135,12 @@ function toggleFullScreen() {
     if (document.fullscreenElement) {
         document.exitFullscreen();
         fullscreenButton.className = "fullscreen";
+        fullscreenButton.setAttribute('data-tooltip', 'Open fullscreen');
     }
     else {
         videoBox.requestFullscreen();
         fullscreenButton.className = "exit-fullscreen";
+        fullscreenButton.setAttribute('data-tooltip', 'Exit fullscreen');
     }
 }
 // --Formatting time for showing
@@ -194,9 +198,11 @@ function toggleMute() {
     video.muted = !video.muted;
     if (video.muted) {
         volButton.classList.add('mute');
+        volButton.setAttribute('data-tooltip', 'Unmute');
     }
     else {
         volButton.classList.remove('mute');
+        volButton.setAttribute('data-tooltip', 'Mute');
     }
 }
 function hideControls() {
