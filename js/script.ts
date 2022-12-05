@@ -186,6 +186,7 @@ function jumpBack() {
 function updateVolume() {
     if (video.muted) {
         video.muted = false;
+        
     }
     video.volume = +volSlider.value;
 }
@@ -194,11 +195,10 @@ function toggleMute() {
 
     if (video.muted) {
         volButton.classList.add('mute');
-        //   volume.setAttribute('data-volume', volume.value);
-        //   volume.value = 0;
+
     } else {
         volButton.classList.remove('mute');
-        //   volume.value = volume.dataset.volume;
+
     }
 }
 
