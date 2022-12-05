@@ -67,16 +67,23 @@ fullscreenButton.setAttribute('data-tooltip', 'Open fullscreen');
 const timeLine = document.createElement('input');
 timeLine.type = 'range';
 timeLine.className = 'timeline';
+timeLine.name = "time";
+timeLine.step = "0.01";
+const timeToolTip = document.createElement('output');
+timeToolTip.className = 'time-tooltip';
+
 //
 const volumeBox = document.createElement('div');
-timelineBox.className = "volume-controls";
+volumeBox.className = "volume-controls hidden";
 const volSlider = document.createElement('input');
 volSlider.type = 'range';
-volSlider.className = 'volume hidden';
+volSlider.className = 'volume';
 volSlider.value = "1";
 volSlider.max = "1";
 volSlider.min = "0";
 volSlider.step = "0.01";
+const volToolTip = document.createElement('output');
+volToolTip.className = 'vol-tooltip';
 //
 const time = document.createElement('div');
 time.className = "time";
@@ -101,11 +108,14 @@ leftControls.appendChild(playButton);
 leftControls.appendChild(skipBackwardButton);
 leftControls.appendChild(skipForwardButton);
 leftControls.appendChild(volButton);
-leftControls.appendChild(volSlider);
+leftControls.appendChild(volumeBox);
+volumeBox.appendChild(volSlider);
+volumeBox.appendChild(volToolTip);
 rightControls.appendChild(time);
 time.appendChild(timeElapsed);
 time.appendChild(timeDuration);
 rightControls.appendChild(fullscreenButton);
+timelineBox.appendChild(timeToolTip);
 
 //
 // --Functions
@@ -158,19 +168,24 @@ function initializeVideo() {
     const time = formatTime(videoDuration);
     timeDuration.innerText = `${time.minutes}:${time.seconds}`;
     //timeDuration.setAttribute('datetime', `${time.minutes}m ${time.seconds}s`);
+    video.currentTime = 0;
 }
 
 function updateTimeElapsed() {
-    const time = formatTime(Math.round(video.currentTime));
-    timeElapsed.innerText = `${time.minutes}:${time.seconds} / `;
-    //timeElapsed.setAttribute('datetime', `${time.minutes}m ${time.seconds}s`);
+    const time = formatTime(video.currentTime);
+    const timeText = `${time.minutes}:${time.seconds}`;
+    const relativeTime = video.currentTime * 100/video.duration;
+    timeElapsed.innerText = timeText+' / ';
+    timeToolTip.textContent = timeText;
+    // timeToolTip.setAttribute('time-elapsed', `calc(${relativeTime}% + (${8 - relativeTime * 0.15}px))`);
+    timeToolTip.style.left = (`calc(${relativeTime}% + (${8 - relativeTime* 0.15 - 17}px))`);
 }
 function updateProgress() {
-    timeLine.value = Math.floor(video.currentTime).toString(); //gives seconds
+    timeLine.value = (video.currentTime).toString(); //gives seconds
 }
 // -- Update timeline
 function changeTime() {
-    video.currentTime = Math.floor(+timeLine.value)
+    video.currentTime = (+timeLine.value)
 }
 function jumpForward() {
     if (video.currentTime + jumpStep < video.duration) {
@@ -193,6 +208,8 @@ function updateVolume() {
 
     }
     video.volume = +volSlider.value;
+    volToolTip.textContent = (+volSlider.value*100).toFixed(0).toString()+'%';
+    volToolTip.style.left = (`calc(${+volSlider.value*100}% + (${8 - (+volSlider.value*100) * 0.15 - 17}px))`);
 }
 function toggleMute() {
     video.muted = !video.muted;
@@ -218,12 +235,11 @@ function showControls() {
     controlsBox.classList.remove('hide');
 }
 function toggleVolSliderOn() {
-    volSlider.classList.remove('hidden');
+    volumeBox.classList.remove('hidden');
 }
 function toggleVolSliderOff() {
-    volSlider.classList.add('hidden');
+    volumeBox.classList.add('hidden');
 }
-
 
 //
 // --- Listeners
