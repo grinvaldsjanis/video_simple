@@ -69,7 +69,7 @@ timeLine.className = 'timeline';
 timeLine.name = "time";
 timeLine.step = "0.01";
 const timeToolTip = document.createElement('output');
-timeToolTip.className = 'time-tooltip';
+timeToolTip.className = 'time-tooltip hidden';
 //
 const volumeBox = document.createElement('div');
 volumeBox.className = "volume-controls hidden";
@@ -81,7 +81,8 @@ volSlider.max = "1";
 volSlider.min = "0";
 volSlider.step = "0.01";
 const volToolTip = document.createElement('output');
-volToolTip.className = 'vol-tooltip';
+volToolTip.className = 'vol-tooltip hidden';
+volToolTip.textContent = '100%';
 //
 const time = document.createElement('div');
 time.className = "time";
@@ -168,6 +169,7 @@ function initializeVideo() {
     timeDuration.innerText = `${time.minutes}:${time.seconds}`;
     //timeDuration.setAttribute('datetime', `${time.minutes}m ${time.seconds}s`);
     video.currentTime = 0;
+    video.volume = 1;
 }
 function updateTimeElapsed() {
     const time = formatTime(video.currentTime);
@@ -184,6 +186,7 @@ function updateProgress() {
 // -- Update timeline
 function changeTime() {
     video.currentTime = (+timeLine.value);
+    timeToolTip.classList.remove('hidden');
 }
 function jumpForward() {
     if (video.currentTime + jumpStep < video.duration) {
@@ -208,6 +211,7 @@ function updateVolume() {
     }
     video.volume = +volSlider.value;
     volToolTip.textContent = (+volSlider.value * 100).toFixed(0).toString() + '%';
+    volToolTip.classList.remove('hidden');
     volToolTip.style.left = (`calc(${+volSlider.value * 100}% + (${8 - (+volSlider.value * 100) * 0.15 - 17}px))`);
 }
 function toggleMute() {
@@ -237,6 +241,12 @@ function toggleVolSliderOn() {
 function toggleVolSliderOff() {
     volumeBox.classList.add('hidden');
 }
+function hideVolTooltip() {
+    volToolTip.classList.add('hidden');
+}
+function hideTimeTooltip() {
+    timeToolTip.classList.add('hidden');
+}
 //
 // --- Listeners
 //
@@ -257,9 +267,11 @@ video.addEventListener('timeupdate', updateProgress);
 //
 timeLine.addEventListener('change', changeTime);
 timeLine.addEventListener('input', changeTime);
+timeLine.addEventListener('mouseleave', hideTimeTooltip);
 //
 volSlider.addEventListener('change', updateVolume);
 volSlider.addEventListener('input', updateVolume);
+volSlider.addEventListener('mouseleave', hideVolTooltip);
 //
 fullscreenButton.onclick = toggleFullScreen;
 //
