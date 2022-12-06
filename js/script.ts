@@ -174,11 +174,11 @@ function initializeVideo() {
 function updateTimeElapsed() {
     const time = formatTime(video.currentTime);
     const timeText = `${time.minutes}:${time.seconds}`;
-    const relativeTime = video.currentTime * 100/video.duration;
-    timeElapsed.innerText = timeText+' / ';
+    const relativeTime = video.currentTime * 100 / video.duration;
+    timeElapsed.innerText = timeText + ' / ';
     timeToolTip.textContent = timeText;
     // timeToolTip.setAttribute('time-elapsed', `calc(${relativeTime}% + (${8 - relativeTime * 0.15}px))`);
-    timeToolTip.style.left = (`calc(${relativeTime}% + (${8 - relativeTime* 0.15 - 17}px))`);
+    timeToolTip.style.left = (`calc(${relativeTime}% + (${8 - relativeTime * 0.15 - 17}px))`);
 }
 function updateProgress() {
     timeLine.value = (video.currentTime).toString(); //gives seconds
@@ -208,8 +208,8 @@ function updateVolume() {
 
     }
     video.volume = +volSlider.value;
-    volToolTip.textContent = (+volSlider.value*100).toFixed(0).toString()+'%';
-    volToolTip.style.left = (`calc(${+volSlider.value*100}% + (${8 - (+volSlider.value*100) * 0.15 - 17}px))`);
+    volToolTip.textContent = (+volSlider.value * 100).toFixed(0).toString() + '%';
+    volToolTip.style.left = (`calc(${+volSlider.value * 100}% + (${8 - (+volSlider.value * 100) * 0.15 - 17}px))`);
 }
 function toggleMute() {
     video.muted = !video.muted;
@@ -268,5 +268,5 @@ volSlider.addEventListener('input', updateVolume);
 //
 fullscreenButton.onclick = toggleFullScreen;
 //
-playerBox.addEventListener('mouseenter', showControls);
-playerBox.addEventListener('mouseleave', hideControls);
+videoBox.addEventListener('mouseenter', showControls);
+videoBox.addEventListener('mouseleave', hideControls);

@@ -263,6 +263,6 @@ volSlider.addEventListener('input', updateVolume);
 //
 fullscreenButton.onclick = toggleFullScreen;
 //
-playerBox.addEventListener('mouseenter', showControls);
-playerBox.addEventListener('mouseleave', hideControls);
+videoBox.addEventListener('mouseenter', showControls);
+videoBox.addEventListener('mouseleave', hideControls);
 //# sourceMappingURL=script.js.map
